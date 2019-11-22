@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+Clone the repo and check out `Documentation.playground` for interactive framework documentation.
+
 SwiftUI:
 
 ```swift
