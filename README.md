@@ -1,6 +1,10 @@
 **SudoChess** is an open-ended chess library leveraging **SwiftUI** and **Combine** that makes it easy to speak the language of chess. Design your own computer opponent, or use it as a foundation for your own chess app. Includes a simple board and game interface all written in **SwiftUI**.
 
+![preview](http://s3.amazonaws.com/PermanentHosting/sudochess_preview.gif)
+
 ## Getting Started
+
+Clone the repo and check out `Documentation.playground` for interactive framework documentation.
 
 SwiftUI:
 
