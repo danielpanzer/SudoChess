@@ -111,6 +111,7 @@
 		2759054C2354DBA60059F43D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		275905502354EBB90059F43D /* BooleanChessGridSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanChessGridSpec.swift; sourceTree = "<group>"; };
 		27715852234EE176008DE28B /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
+		2798090A23883B770006C8BD /* Documentation.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Documentation.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		27B802CF237F5059002D1738 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		27CE40D823848002004D0717 /* ModestMike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModestMike.swift; sourceTree = "<group>"; };
 		27D18DAE237F27F000139919 /* CheckHandlerPerformanceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckHandlerPerformanceSpec.swift; sourceTree = "<group>"; };
@@ -240,6 +241,7 @@
 		27E32169231DD2AB00B4B520 /* SudoChess */ = {
 			isa = PBXGroup;
 			children = (
+				2798090A23883B770006C8BD /* Documentation.playground */,
 				273F2FD123614E6900DC0768 /* AI Opponents */,
 				27EB05AB2345D1A500377070 /* Views */,
 				275722EB2331C96D001E0AAA /* Grids */,
@@ -616,6 +618,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = AV5R9X3BW5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -628,7 +631,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = nyc.cruxcode.SudoChess;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -643,6 +646,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = AV5R9X3BW5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -655,7 +659,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = nyc.cruxcode.SudoChess;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
