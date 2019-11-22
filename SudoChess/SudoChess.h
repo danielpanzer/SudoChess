@@ -3,7 +3,7 @@
 //  SudoChess
 //
 //  Created by Daniel Panzer on 9/2/19.
-//  Copyright © 2019 CruxCode LLC. All rights reserved.
+//  Copyright © 2019 Daniel Panzer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
