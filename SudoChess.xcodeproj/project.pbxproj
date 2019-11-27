@@ -53,6 +53,8 @@
 		273F2FCE23614B8900DC0768 /* ArtificialOpponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F2FCD23614B8900DC0768 /* ArtificialOpponent.swift */; };
 		273F2FD023614C2700DC0768 /* Roster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F2FCF23614C2700DC0768 /* Roster.swift */; };
 		273F2FD323614E8000DC0768 /* StupidSteve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F2FD223614E8000DC0768 /* StupidSteve.swift */; };
+		279CD751238B836F004CED72 /* PowerPete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279CD750238B836F004CED72 /* PowerPete.swift */; };
+		27B28215238EDAB100BE9FBF /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B28214238EDAB100BE9FBF /* Tree.swift */; };
 		27B802D4237F61A3002D1738 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27B802CF237F5059002D1738 /* Icons.xcassets */; };
 		27CE40D923848002004D0717 /* ModestMike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CE40D823848002004D0717 /* ModestMike.swift */; };
 		27D18DAF237F27F000139919 /* CheckHandlerPerformanceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D18DAE237F27F000139919 /* CheckHandlerPerformanceSpec.swift */; };
@@ -112,6 +114,8 @@
 		275905502354EBB90059F43D /* BooleanChessGridSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanChessGridSpec.swift; sourceTree = "<group>"; };
 		27715852234EE176008DE28B /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		2798090A23883B770006C8BD /* Documentation.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Documentation.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		279CD750238B836F004CED72 /* PowerPete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerPete.swift; sourceTree = "<group>"; };
+		27B28214238EDAB100BE9FBF /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		27B802CF237F5059002D1738 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		27CE40D823848002004D0717 /* ModestMike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModestMike.swift; sourceTree = "<group>"; };
 		27D18DAE237F27F000139919 /* CheckHandlerPerformanceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckHandlerPerformanceSpec.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 			children = (
 				273F2FD223614E8000DC0768 /* StupidSteve.swift */,
 				27CE40D823848002004D0717 /* ModestMike.swift */,
+				279CD750238B836F004CED72 /* PowerPete.swift */,
 			);
 			path = "AI Opponents";
 			sourceTree = "<group>";
@@ -219,6 +224,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		27B28213238EDA8500BE9FBF /* Tree */ = {
+			isa = PBXGroup;
+			children = (
+				27B28214238EDAB100BE9FBF /* Tree.swift */,
+			);
+			path = Tree;
+			sourceTree = "<group>";
+		};
 		27E3215D231DD2AB00B4B520 = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +257,7 @@
 				2798090A23883B770006C8BD /* Documentation.playground */,
 				273F2FD123614E6900DC0768 /* AI Opponents */,
 				27EB05AB2345D1A500377070 /* Views */,
+				27B28213238EDA8500BE9FBF /* Tree */,
 				275722EB2331C96D001E0AAA /* Grids */,
 				275722EC2331C98D001E0AAA /* Models */,
 				275722ED2331C997001E0AAA /* Extensions */,
@@ -435,6 +449,7 @@
 				273F2F6A235FF02800DC0768 /* PieceView.swift in Sources */,
 				273F2FCA2361414100DC0768 /* GameViewModel.swift in Sources */,
 				273F2F6B235FF02800DC0768 /* Grid.swift in Sources */,
+				279CD751238B836F004CED72 /* PowerPete.swift in Sources */,
 				273F2F6C235FF02800DC0768 /* ChessGrid.swift in Sources */,
 				273F2F6D235FF02800DC0768 /* BooleanChessGrid.swift in Sources */,
 				273F2F6E235FF02800DC0768 /* Board.swift in Sources */,
@@ -452,6 +467,7 @@
 				273F2F78235FF02800DC0768 /* Piece.swift in Sources */,
 				273F2F79235FF02800DC0768 /* Rook.swift in Sources */,
 				273F2F7A235FF02800DC0768 /* Bishop.swift in Sources */,
+				27B28215238EDAB100BE9FBF /* Tree.swift in Sources */,
 				273F2F7B235FF02800DC0768 /* Pawn.swift in Sources */,
 				273F2FCE23614B8900DC0768 /* ArtificialOpponent.swift in Sources */,
 				273F2F7C235FF02800DC0768 /* Queen.swift in Sources */,

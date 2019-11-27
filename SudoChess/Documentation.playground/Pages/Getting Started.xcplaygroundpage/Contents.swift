@@ -6,7 +6,7 @@ import SudoChess
 import PlaygroundSupport
 
 let roster = Roster(whitePlayer: .human,
-                    blackPlayer: .ai(ModestMike()))
+                    blackPlayer: .ai(PowerPete()))
 
 let viewModel = GameViewModel(roster: roster)
 let view = GameView(viewModel: viewModel)
