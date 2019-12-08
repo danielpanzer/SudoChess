@@ -8,10 +8,18 @@
 
 import Foundation
 
-/// AI written around conserving piece values. Will make generally intelligent moves and go after your most valuable pieces
-public class PowerPete {
+/// AI that searches several moves deep to find the best outcome
+public class PowerPete: ObservableObject {
+    
+    private typealias Leaf = Tree<Game>.Node<Game>
     
     public init() {}
+    
+    @Published public var numberOfNodes: Int = 0
+    @Published public var numberOfPotentialScenarios: Int = 0
+    @Published public var numberOfAnalysesFinished: Int = 0
+    
+    private var tree: Tree<Game>!
     
     private struct ScenarioAnalysis {
         
@@ -69,6 +77,10 @@ public class PowerPete {
         let newScenarioAnalysis = ScenarioAnalysis(mostValuablePieceThreatenedByOpponent: newMostValuablePieceThreatenedByOpponent,
                                                    mostValuablePieceThreatenedByUs: newMostValuablePieceThreatenedByUs)
         
+        DispatchQueue.main.async {
+            self.numberOfAnalysesFinished += 1
+        }
+        
         return MoveAnalysis(capturedPiece: move.capturedPiece,
                             oldScenario: oldScenarioAnalysis,
                             newScenario: newScenarioAnalysis,
@@ -93,50 +105,114 @@ public class PowerPete {
 
 extension PowerPete: ArtificialOpponent {
     
-    private struct MoveThread {
-        let moves: [Move]
-        
-        
-    }
-    
     public var name: String {
         "Power Pete"
     }
     
-    public func nextMove(in game: Game) -> Move {
+    public func nextMove(in game: Game, completion: @escaping (Move) -> ()) {
         
-        let depth = 3
-        
-        let tree = Tree(root: Tree.Node(value: game))
-        
-        for _ in stride(from: 0, to: depth, by: 1) {
-            let currentLeaves = tree.leaves
-            for leaf in currentLeaves {
-                
-                let scenario = leaf.value
-                let newPossibleScenarios = scenario
-                    .currentMoves()
-                    .map { scenario.performing($0) }
-                
-                newPossibleScenarios
-                    .forEach { newScenario in leaf.add(child: Tree.Node(value: newScenario))}
-            }
+        DispatchQueue.main.async {
+            self.numberOfNodes = 0
+            self.numberOfPotentialScenarios = 0
+            self.numberOfAnalysesFinished = 0
         }
         
-        let bestLeaf = tree.leaves
-            .sorted(by: { firstLeaf, secondLeaf in
-                let firstAnalysis = analysis(for: firstLeaf.value.history.last!, by: firstLeaf.value.turn.opponent, in: firstLeaf.parent!.value)
-                let secondAnalysis = analysis(for: secondLeaf.value.history.last!, by: secondLeaf.value.turn.opponent, in: secondLeaf.parent!.value)
-                return firstAnalysis.isObjectivelyBetter(than: secondAnalysis)
-        })
-        .first!
-     
-        return bestLeaf
-            .parents
-            .dropFirst()
-            .first!
-            .value
-            .history
-            .last!
+        DispatchQueue.global(qos: .userInitiated).async {
+            
+            let depth = 3
+            
+            self.tree = Tree(root: Tree.Node(value: game))
+            
+            for _ in stride(from: 0, to: depth, by: 1) {
+                
+                let currentLeaves: [Leaf] = {
+                    let leaves = self.tree.leaves
+                    return leaves.count > 0 ? leaves : [self.tree.root]
+                }()
+                
+                let calculateChildrenForIteration = DispatchGroup()
+                
+                for leaf in currentLeaves {
+                    
+                    calculateChildrenForIteration.enter()
+                    
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        
+                        let scenario = leaf.value
+                        let newPossibleScenarios = scenario
+                            .currentMoves()
+                            .map { scenario.performing($0) }
+                        
+                        newPossibleScenarios
+                            .forEach {
+                                newScenario in leaf.add(child: Tree.Node(value: newScenario))
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.numberOfNodes += newPossibleScenarios.count
+                            calculateChildrenForIteration.leave()
+                        }
+                    }
+                }
+                
+                calculateChildrenForIteration.wait()
+            }
+            
+            DispatchQueue.main.async {
+                self.numberOfPotentialScenarios = self.tree.leaves.count
+            }
+            
+            self.analyses(for: self.tree.leaves) { leavesAndAnalyses in
+                
+                let bestLeafAndAnalysis = leavesAndAnalyses
+                .sorted(by: { firstLeafAndAnalysis, secondLeafAndAnalysis in
+                    let firstAnalysis = firstLeafAndAnalysis.analysis
+                    let secondAnalysis = secondLeafAndAnalysis.analysis
+                    return firstAnalysis.isObjectivelyBetter(than: secondAnalysis)
+                })
+                    .first!
+                
+                let result = bestLeafAndAnalysis
+                    .leaf
+                    .parents
+                    .dropFirst()
+                    .first!
+                    .value
+                    .history
+                    .last!
+                
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
+        }
+    }
+    
+    private func analyses(for leaves: [Leaf], callback: @escaping ([(leaf: Leaf, analysis: MoveAnalysis)]) -> ()) {
+        
+        var result = [(Leaf, MoveAnalysis)]()
+        let mutex = DispatchQueue(label: "AnalysesForLeavesMutex", qos: .userInitiated)
+        let calculations = DispatchGroup()
+            
+        for leaf in leaves {
+            calculations.enter()
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                let data = self.analysis(for: leaf.value.history.last!,
+                                         by: leaf.value.turn.opponent,
+                                         in: leaf.parent!.value)
+                
+                let entry = (leaf, data)
+                
+                mutex.async {
+                    result.append(entry)
+                    calculations.leave()
+                }
+            }
+        }
+            
+        calculations.notify(queue: mutex) {
+            callback(result)
+        }
     }
 }

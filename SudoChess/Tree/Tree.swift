@@ -53,7 +53,7 @@ extension Tree.Node {
         case .none:
             return [self]
         case .some(let parent):
-            return parent.parents
+            return parent.parents + [self]
         }
     }
     

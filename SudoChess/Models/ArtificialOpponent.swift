@@ -16,6 +16,6 @@ public protocol ArtificialOpponent : class {
     /// This method is called by the game when it needs the AI to decide the next move. Implement your decision making code here
     /// - Parameter game: The current state of the game
     /// - Returns: The AI's move decision
-    func nextMove(in game: Game) -> Move
+    func nextMove(in game: Game, completion: @escaping (Move) -> ())
     
 }

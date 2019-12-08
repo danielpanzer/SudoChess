@@ -19,7 +19,7 @@ public struct BoardView: View {
     @State private var isShowingPromotionSheet: Bool = false
     
     private func position(_ row: Int, _ column: Int) -> Position {
-        return Position(gridIndex: IndexPath(row: row, column: column))!
+        return Position(gridIndex: IndexPath(row: row, column: column))
     }
     
     private static let spacing: CGFloat = {

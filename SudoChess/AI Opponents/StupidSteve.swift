@@ -19,7 +19,7 @@ extension StupidSteve : ArtificialOpponent {
         "Stupid Steve"
     }
     
-    public func nextMove(in game: Game) -> Move {
+    public func nextMove(in game: Game, completion: @escaping (Move) -> ()) {
         
         let validMoves = game.currentMoves()
         let piecesWeCanCapture: [(piece: Piece, move: Move)] = validMoves
@@ -37,10 +37,15 @@ extension StupidSteve : ArtificialOpponent {
                 .sorted(by: {return $0.piece.value > $1.piece.value})
                 .first!
             
-            return mostValuableCapture.move
+            DispatchQueue.main.async {
+                completion(mostValuableCapture.move)
+            }
             
         } else {
-            return validMoves.randomElement()!
+            
+            DispatchQueue.main.async {
+                completion(validMoves.randomElement()!)
+            }
         }
     }
 }

@@ -97,15 +97,20 @@ extension ModestMike : ArtificialOpponent {
         "Modest Mike"
     }
     
-    public func nextMove(in game: Game) -> Move {
+    public func nextMove(in game: Game, completion: @escaping (Move) -> ()) {
         
-        let moves = game.currentMoves()
-        let analysies = moves
-            .map { move in
-            analysis(for: move, by: game.turn, in: game)
+        DispatchQueue.global(qos: .userInitiated).async {
+            
+            let moves = game.currentMoves()
+            let analysies = moves
+                .map { move in
+                    self.analysis(for: move, by: game.turn, in: game)
+            }
+            .sorted(by: {$0.isObjectivelyBetter(than: $1)})
+
+            DispatchQueue.main.async {
+                completion(analysies.first!.move)
+            }
         }
-        .sorted(by: {$0.isObjectivelyBetter(than: $1)})
-        
-        return analysies.first!.move
     }
 }

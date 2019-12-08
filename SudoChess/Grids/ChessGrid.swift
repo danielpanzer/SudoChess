@@ -62,22 +62,22 @@ extension ChessGrid : Collection {
     public typealias Index = Position
     
     public var startIndex: Position {
-        return Position(gridIndex: grid.startIndex)!
+        return Position(.a, .eight)
     }
     
     public var endIndex: Position {
-        return Position(gridIndex: grid.endIndex)!
+        return Position(.a, .end)
     }
     
     public func index(after i: Position) -> Position {
-        return Position(gridIndex: grid.index(after: i.gridIndex))!
+        return Position.positions[Position.indices[i]! + 1]!
     }
 }
 
 extension ChessGrid : BidirectionalCollection {
     
     public func index(before i: Position) -> Position {
-        return Position(gridIndex: grid.index(before: i.gridIndex))!
+        return Position.positions[Position.indices[i]! - 1]!
     }
 }
 

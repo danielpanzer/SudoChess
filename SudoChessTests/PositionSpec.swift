@@ -151,22 +151,6 @@ class PositionSpec: QuickSpec {
             }
         }
         
-        describe("An IndexPath that is out of bounds for a chess grid") {
-            
-            beforeEach {
-                self.indexPath = IndexPath(row: 10, column: 0)
-            }
-            
-            afterEach {
-                self.indexPath = nil
-            }
-            
-            it("converts to a null chess position") {
-                let conversion = Position(gridIndex: self.indexPath)
-                expect(conversion).to(beNil())
-            }
-        }
-        
         describe("A straight line of positions") {
             
             beforeEach {

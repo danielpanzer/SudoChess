@@ -153,8 +153,7 @@ public class GameViewModel : ObservableObject, Identifiable {
         
         let minimumThinkingTime = DispatchTime.now() + DispatchTimeInterval.seconds(1)
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            let nextMove = artificialOpponent.nextMove(in: self.game)
+        artificialOpponent.nextMove(in: self.game) { nextMove in
             
             DispatchQueue.main.asyncAfter(deadline: minimumThinkingTime) {
                 
