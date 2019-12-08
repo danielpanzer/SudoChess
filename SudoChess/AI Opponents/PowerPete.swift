@@ -20,11 +20,14 @@ public class PowerPete: ObservableObject {
     @Published public var numberOfAnalysesFinished: Int = 0
     
     private var tree: Tree<Game>!
+    private var uiUpdater: Timer?
     
     private struct ScenarioAnalysis {
         
         let mostValuablePieceThreatenedByOpponent: Piece?
         let mostValuablePieceThreatenedByUs: Piece?
+        let opponentPieceValue: Int
+        let ourPieceValue: Int
         
         var opponentThreatValue: Int {
             return mostValuablePieceThreatenedByOpponent?.value ?? 0
@@ -36,6 +39,10 @@ public class PowerPete: ObservableObject {
         
         var threatScore: Int {
             return ourThreatValue - opponentThreatValue
+        }
+        
+        var pieceScore: Int {
+            return ourPieceValue - opponentPieceValue
         }
     }
     
@@ -53,7 +60,15 @@ public class PowerPete: ObservableObject {
             return newScenario.threatScore - oldScenario.threatScore
         }
         
+        var pieceScore: Int {
+            return newScenario.pieceScore - oldScenario.pieceScore
+        }
+        
         func isObjectivelyBetter(than otherAnalysis: MoveAnalysis) -> Bool {
+            
+            guard self.pieceScore >= otherAnalysis.pieceScore else {
+                return false
+            }
             
             guard self.exchangeRatio == otherAnalysis.exchangeRatio else {
                 return self.exchangeRatio > otherAnalysis.exchangeRatio
@@ -68,18 +83,18 @@ public class PowerPete: ObservableObject {
         let currentMostValuablePieceThreatenedByOpponent = mostValuablePieceThreatened(by: team.opponent, in: game)
         let currentMostValuablePieceThreatenedByUs = mostValuablePieceThreatened(by: team, in: game)
         let oldScenarioAnalysis = ScenarioAnalysis(mostValuablePieceThreatenedByOpponent: currentMostValuablePieceThreatenedByOpponent,
-                                                   mostValuablePieceThreatenedByUs: currentMostValuablePieceThreatenedByUs)
+                                                   mostValuablePieceThreatenedByUs: currentMostValuablePieceThreatenedByUs,
+                                                   opponentPieceValue: pieceValue(of: team.opponent, in: game),
+                                                   ourPieceValue: pieceValue(of: team, in: game))
         
         let newScenario = game.performing(move)
         
         let newMostValuablePieceThreatenedByOpponent = mostValuablePieceThreatened(by: team.opponent, in: newScenario)
         let newMostValuablePieceThreatenedByUs = mostValuablePieceThreatened(by: team, in: newScenario)
         let newScenarioAnalysis = ScenarioAnalysis(mostValuablePieceThreatenedByOpponent: newMostValuablePieceThreatenedByOpponent,
-                                                   mostValuablePieceThreatenedByUs: newMostValuablePieceThreatenedByUs)
-        
-        DispatchQueue.main.async {
-            self.numberOfAnalysesFinished += 1
-        }
+                                                   mostValuablePieceThreatenedByUs: newMostValuablePieceThreatenedByUs,
+                                                   opponentPieceValue: pieceValue(of: team.opponent, in: newScenario),
+                                                   ourPieceValue: pieceValue(of: team, in: newScenario))
         
         return MoveAnalysis(capturedPiece: move.capturedPiece,
                             oldScenario: oldScenarioAnalysis,
@@ -101,6 +116,13 @@ public class PowerPete: ObservableObject {
         .first
     }
     
+    private func pieceValue(of team: Team, in game: Game) -> Int {
+        return game
+            .board
+            .compactMap {$0}
+            .filter {$0.owner == team && !($0 is King)}
+            .reduce(0) {currentValue, piece in return currentValue + piece.value}
+    }
 }
 
 extension PowerPete: ArtificialOpponent {
@@ -165,11 +187,11 @@ extension PowerPete: ArtificialOpponent {
             self.analyses(for: self.tree.leaves) { leavesAndAnalyses in
                 
                 let bestLeafAndAnalysis = leavesAndAnalyses
-                .sorted(by: { firstLeafAndAnalysis, secondLeafAndAnalysis in
-                    let firstAnalysis = firstLeafAndAnalysis.analysis
-                    let secondAnalysis = secondLeafAndAnalysis.analysis
-                    return firstAnalysis.isObjectivelyBetter(than: secondAnalysis)
-                })
+                    .sorted(by: { firstLeafAndAnalysis, secondLeafAndAnalysis in
+                        let firstAnalysis = firstLeafAndAnalysis.analysis
+                        let secondAnalysis = secondLeafAndAnalysis.analysis
+                        return firstAnalysis.isObjectivelyBetter(than: secondAnalysis)
+                    })
                     .first!
                 
                 let result = bestLeafAndAnalysis
@@ -193,7 +215,7 @@ extension PowerPete: ArtificialOpponent {
         var result = [(Leaf, MoveAnalysis)]()
         let mutex = DispatchQueue(label: "AnalysesForLeavesMutex", qos: .userInitiated)
         let calculations = DispatchGroup()
-            
+        
         for leaf in leaves {
             calculations.enter()
             
@@ -210,8 +232,24 @@ extension PowerPete: ArtificialOpponent {
                 }
             }
         }
-            
+        
+        DispatchQueue.main.async {
+            self.uiUpdater = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                
+                mutex.async {
+                    let count = result.count
+                    
+                    DispatchQueue.main.async {
+                        self.numberOfAnalysesFinished = count
+                    }
+                }
+            }
+        }
+        
         calculations.notify(queue: mutex) {
+            self.uiUpdater?.fire()
+            self.uiUpdater?.invalidate()
+            self.uiUpdater = nil
             callback(result)
         }
     }
