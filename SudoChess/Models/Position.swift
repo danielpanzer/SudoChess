@@ -141,6 +141,22 @@ public struct Position : Equatable {
     }
 }
 
+extension Position : IntegerRepresentable {
+    
+    init?(_ integer: Int) {
+        guard
+            let rank = Position.Rank(rawValue: integer % 8),
+            let row = Position.Row(rawValue: (integer / 8) + 1)
+            else {return nil}
+        
+        self = Position(rank, row)
+    }
+    
+    var integerRepresentation: Int {
+        return rank.rawValue * row.rawValue
+    }
+}
+
 extension Position : Comparable {
     
     public static func < (lhs: Position, rhs: Position) -> Bool {

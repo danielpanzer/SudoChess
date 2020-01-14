@@ -54,6 +54,7 @@
 		273F2FD023614C2700DC0768 /* Roster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F2FCF23614C2700DC0768 /* Roster.swift */; };
 		273F2FD323614E8000DC0768 /* StupidSteve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F2FD223614E8000DC0768 /* StupidSteve.swift */; };
 		279CD751238B836F004CED72 /* PowerPete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279CD750238B836F004CED72 /* PowerPete.swift */; };
+		27A5844C239C7A810065012C /* IntegerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A5844B239C7A810065012C /* IntegerRepresentable.swift */; };
 		27B28215238EDAB100BE9FBF /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B28214238EDAB100BE9FBF /* Tree.swift */; };
 		27B802D4237F61A3002D1738 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27B802CF237F5059002D1738 /* Icons.xcassets */; };
 		27CE40D923848002004D0717 /* ModestMike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CE40D823848002004D0717 /* ModestMike.swift */; };
@@ -115,6 +116,7 @@
 		27715852234EE176008DE28B /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		2798090A23883B770006C8BD /* Documentation.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Documentation.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		279CD750238B836F004CED72 /* PowerPete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerPete.swift; sourceTree = "<group>"; };
+		27A5844B239C7A810065012C /* IntegerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerRepresentable.swift; sourceTree = "<group>"; };
 		27B28214238EDAB100BE9FBF /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		27B802CF237F5059002D1738 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		27CE40D823848002004D0717 /* ModestMike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModestMike.swift; sourceTree = "<group>"; };
@@ -224,6 +226,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		27A5844A239C7A530065012C /* Metal Processing */ = {
+			isa = PBXGroup;
+			children = (
+				27A5844B239C7A810065012C /* IntegerRepresentable.swift */,
+			);
+			path = "Metal Processing";
+			sourceTree = "<group>";
+		};
 		27B28213238EDA8500BE9FBF /* Tree */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +273,7 @@
 				275722ED2331C997001E0AAA /* Extensions */,
 				27F8B489232A0227004D7996 /* Pieces */,
 				27138B462345D128000ECDFF /* Handlers */,
+				27A5844A239C7A530065012C /* Metal Processing */,
 				27E3216A231DD2AB00B4B520 /* SudoChess.h */,
 				27E3216B231DD2AB00B4B520 /* Info.plist */,
 				27B802CF237F5059002D1738 /* Icons.xcassets */,
@@ -448,6 +459,7 @@
 				273F2F69235FF02800DC0768 /* HistoryView.swift in Sources */,
 				273F2F6A235FF02800DC0768 /* PieceView.swift in Sources */,
 				273F2FCA2361414100DC0768 /* GameViewModel.swift in Sources */,
+				27A5844C239C7A810065012C /* IntegerRepresentable.swift in Sources */,
 				273F2F6B235FF02800DC0768 /* Grid.swift in Sources */,
 				279CD751238B836F004CED72 /* PowerPete.swift in Sources */,
 				273F2F6C235FF02800DC0768 /* ChessGrid.swift in Sources */,
