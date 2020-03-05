@@ -60,6 +60,10 @@
 		27E32171231DD2AB00B4B520 /* SudoChess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E32167231DD2AB00B4B520 /* SudoChess.framework */; };
 		27E32176231DD2AB00B4B520 /* SudoChessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E32175231DD2AB00B4B520 /* SudoChessTests.swift */; };
 		27E32178231DD2AC00B4B520 /* SudoChess.h in Headers */ = {isa = PBXBuildFile; fileRef = 27E3216A231DD2AB00B4B520 /* SudoChess.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		27EF6EF9241071B300935DE5 /* PlayerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF6EF8241071B300935DE5 /* PlayerSelectionView.swift */; };
+		27EF6EFB241072D900935DE5 /* PlayerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF6EFA241072D900935DE5 /* PlayerSelection.swift */; };
+		27EF6EFD24107B9700935DE5 /* StartGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF6EFC24107B9700935DE5 /* StartGameViewModel.swift */; };
+		27EF6F0024107FBA00935DE5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EF6EFE24107D9A00935DE5 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +128,10 @@
 		27E32177231DD2AB00B4B520 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27E32183231DDFE500B4B520 /* IndexPathExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexPathExtension.swift; sourceTree = "<group>"; };
 		27EB05AC2345D1CC00377070 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		27EF6EF8241071B300935DE5 /* PlayerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionView.swift; sourceTree = "<group>"; };
+		27EF6EFA241072D900935DE5 /* PlayerSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelection.swift; sourceTree = "<group>"; };
+		27EF6EFC24107B9700935DE5 /* StartGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameViewModel.swift; sourceTree = "<group>"; };
+		27EF6EFE24107D9A00935DE5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		27F8B43D231DEBC0004D7996 /* ChessGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessGrid.swift; sourceTree = "<group>"; };
 		27F8B441231DEC1F004D7996 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		27F8B443231DEC30004D7996 /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
@@ -205,6 +213,8 @@
 				273F2FC92361414100DC0768 /* GameViewModel.swift */,
 				273F2FCD23614B8900DC0768 /* ArtificialOpponent.swift */,
 				273F2FCF23614C2700DC0768 /* Roster.swift */,
+				27EF6EFA241072D900935DE5 /* PlayerSelection.swift */,
+				27EF6EFC24107B9700935DE5 /* StartGameViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -287,6 +297,8 @@
 				2759053F235025A10059F43D /* ConsoleView.swift */,
 				27590541235028EB0059F43D /* HistoryView.swift */,
 				275905432354914B0059F43D /* PieceView.swift */,
+				27EF6EF8241071B300935DE5 /* PlayerSelectionView.swift */,
+				27EF6EFE24107D9A00935DE5 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -427,8 +439,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				273F2F64235FF02800DC0768 /* BoardView.swift in Sources */,
+				27EF6F0024107FBA00935DE5 /* MainView.swift in Sources */,
 				27DDE309236FE589007F923F /* ArrayExtension.swift in Sources */,
 				273F2F65235FF02800DC0768 /* TileView.swift in Sources */,
+				27EF6EF9241071B300935DE5 /* PlayerSelectionView.swift in Sources */,
 				273F2F67235FF02800DC0768 /* GameView.swift in Sources */,
 				273F2F68235FF02800DC0768 /* ConsoleView.swift in Sources */,
 				273F2F69235FF02800DC0768 /* HistoryView.swift in Sources */,
@@ -442,6 +456,7 @@
 				273F2F71235FF02800DC0768 /* Position.swift in Sources */,
 				273F2F72235FF02800DC0768 /* DirectedPosition.swift in Sources */,
 				273F2F73235FF02800DC0768 /* Game.swift in Sources */,
+				27EF6EFB241072D900935DE5 /* PlayerSelection.swift in Sources */,
 				27CE40D923848002004D0717 /* ModestMike.swift in Sources */,
 				273F2FD323614E8000DC0768 /* StupidSteve.swift in Sources */,
 				273F2F74235FF02800DC0768 /* Move.swift in Sources */,
@@ -457,6 +472,7 @@
 				273F2F7C235FF02800DC0768 /* Queen.swift in Sources */,
 				273F2F7D235FF02800DC0768 /* King.swift in Sources */,
 				273F2F7E235FF02800DC0768 /* Knight.swift in Sources */,
+				27EF6EFD24107B9700935DE5 /* StartGameViewModel.swift in Sources */,
 				273F2F80235FF02800DC0768 /* CheckHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
